@@ -16,15 +16,7 @@ const Pre = ({ loaded, theme }) => {
 
     return <>
 
-        <View style={{
-            justifyContent: 'center',
-            width: maxWidth,
-            alignItems: 'center',
-            position: 'absolute'
 
-        }}>
-            <Logo width={300} style={{ marginTop: 100 }} />
-        </View>
         <Stack.Navigator screenOptions={{
             headerShown: false,
             contentStyle: {
@@ -49,6 +41,16 @@ const Pre = ({ loaded, theme }) => {
                 </>}
 
         </Stack.Navigator>
+
+        <View style={{
+            justifyContent: 'center',
+            width: maxWidth,
+            alignItems: 'center',
+            position: 'absolute'
+
+        }}>
+            <Logo width={300} style={{ marginTop: 50 }} />
+        </View>
     </>
 }
 

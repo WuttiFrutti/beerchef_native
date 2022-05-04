@@ -22,13 +22,13 @@ const UserState: UserStateModel = {
     login: thunk(async (actions, payload) => {
         const token = await performRequest(() => Login(payload.email, payload.password))
         await saveToken(token);
-        actions.validate()
+        await actions.validate();
     }),
     validate: thunk(async (actions) => {
-        actions.setUser(await performRequest(Validate))
+        await actions.setUser(await performRequest(Validate))
     }),
     register: thunk(async (actions, payload) => {
-        actions.setUser(await performRequest(() => Register(payload.username, payload.email, payload.password)));
+        await actions.setUser(await performRequest(() => Register(payload.username, payload.email, payload.password)));
     }),
 }
 

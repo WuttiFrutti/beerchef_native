@@ -1,14 +1,16 @@
 import { Appbar, withTheme } from 'react-native-paper';
 import { LogoSmall } from '../other/SVG';
 import FontAwesome from 'react-native-vector-icons/FontAwesome5';
+import { useStateActions } from './../hooks/StateHooks';
 
 
 const TopBar = ({ theme }) => {
+    const setUser = useStateActions(a => a.userState.setUser)
+
 
     return <>
         <Appbar.Header style={{
             backgroundColor: theme.colors.surface,
-            // overflow: 'visible'
         }} theme={theme}>
             <LogoSmall
                 style={{
@@ -33,7 +35,7 @@ const TopBar = ({ theme }) => {
                         }}
                     />
                 )
-            } onPress={() => { }} />
+            } onPress={() => { setUser(null) }} />
 
 
         </Appbar.Header>

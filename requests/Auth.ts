@@ -7,13 +7,15 @@ export const Login = async (email: string, password: string): Promise<string> =>
 }
 
 export const Validate = async (): Promise<User> => {
-    const { data } = await Api.post("/validate");
+    const { data } = await Api.post("/validate", {});
+
+    console.log('het')
 
     return User.fromJson(data);
 }
 
-export const Register = async (username:string, email:string, password:string): Promise<User> => {
-    const { data } = await Api.post("/register",{ 
+export const Register = async (username: string, email: string, password: string): Promise<User> => {
+    const { data } = await Api.post("/register", {
         username,
         email,
         password

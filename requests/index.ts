@@ -1,7 +1,7 @@
 import axios from "axios";
 import { retrieveToken } from "../persistence/token";
 
-const Api = axios.create({ baseURL: process.env.REACT_APP_BASE_URL || "192.168.178.108:8080" })
+const Api = axios.create({ baseURL: "http://192.168.178.108:8080" })
 
 
 Api.interceptors.request.use(async (config) => {
