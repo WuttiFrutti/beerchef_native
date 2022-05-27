@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { View } from "react-native";
 import { maxHeight, maxHeightVal, maxWidth, maxWidthVal } from "../../other/Helpers";
 import { Logo } from "../../other/SVG";
-import { useStateActions } from "../../hooks/StateHooks";
+import { useStateActions } from "../../hooks/EasyHooks";
 import User from "../../models/User";
 
 

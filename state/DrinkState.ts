@@ -7,8 +7,8 @@ import ListUser from "../models/ListUser";
 
 
 export interface DrinkStateModel {
-    drinks: Set<Drink>,
-    setDrinks: Action<DrinkStateModel, Set<Drink>>,
+    drinks: Array<Drink> | null,
+    setDrinks: Action<DrinkStateModel, Array<Drink>>,
 
     getListUserDrinks: Thunk<DrinkStateModel, ListUser>,
     getListDrinks: Thunk<DrinkStateModel, Id<BeerList>>,
@@ -18,7 +18,7 @@ export interface DrinkStateModel {
 }
 
 const DrinkState: DrinkStateModel = {
-    drinks: new Set(),
+    drinks: null,
     setDrinks: action((state, payload) => {
 
     }),

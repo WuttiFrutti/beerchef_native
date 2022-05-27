@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { sleep } from "../requests";
-import { useStateActions, useStateState } from './../hooks/StateHooks';
+import { useStateActions, useStateState } from './../hooks/EasyHooks';
 import Main from "./main";
 import Pre from "./pre";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';

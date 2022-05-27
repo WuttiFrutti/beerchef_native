@@ -1,7 +1,7 @@
 import { Appbar, withTheme } from 'react-native-paper';
 import { LogoSmall } from '../other/SVG';
 import FontAwesome from 'react-native-vector-icons/FontAwesome5';
-import { useStateActions } from './../hooks/StateHooks';
+import { useStateActions } from './../hooks/EasyHooks';
 
 
 const TopBar = ({ theme }) => {

@@ -5,10 +5,10 @@ import Drink from './Drink';
 
 export default class ListUser {
     user: Id<User>;
-    drinks: Set<Id<Drink>>;
+    drinks: Array<Id<Drink>>;
     total: number;
 
-    constructor(user: Id<User>, drinks: Set<Id<Drink>> = new Set(), total: number = 0) {
+    constructor(user: Id<User>, drinks: Array<Id<Drink>> = [], total: number = 0) {
         this.user = user;
         this.drinks = drinks;
         this.total = total;
@@ -20,7 +20,7 @@ export default class ListUser {
         const listUser = json;
 
         return new ListUser(new Id<User>(listUser.user),
-            new Set<Id<Drink>>(listUser.drinks.map((drink: string) => new Id<Drink>(drink))),
+            [listUser.drinks.map((drink: string) => new Id<Drink>(drink))],
             listUser.total || 0);
 
     }

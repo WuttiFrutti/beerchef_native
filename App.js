@@ -19,7 +19,6 @@ const waveStyle = {
   position: Platform.OS === 'web' ? 'fixed' : 'absolute',
   height: Platform.OS === 'web' ? "100vh" : Dimensions.get('window').height,
   width: Platform.OS === 'web' ? "100vw" : Dimensions.get('window').width,
-  // bottom: - maxHeightVal + (- getStatusBarHeight() * 2) - 16,
   top: getStatusBarHeight() * 3,
   left: 0,
   right: 0,
