@@ -56,7 +56,8 @@ const LoginPage = ({ navigation, theme }: { navigation: any, theme: Theme }) => 
                         onChangeText={text => updateForm("email", text)}></TextInput>
                     <TextInput
                         style={{ marginBottom: 4 }}
-                        label="Gebruikersnaam"
+                        label="Wachtwoord"
+                        secureTextEntry={true}
                         disabled={sending}
                         value={formState.password}
                         mode="outlined"
