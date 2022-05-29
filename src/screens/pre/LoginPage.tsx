@@ -38,29 +38,29 @@ const LoginPage = ({ navigation, theme }: { navigation: any, theme: Theme }) => 
 
     return <>
         <View style={{
+            display: "flex",
             alignItems: 'center',
+            alignContent: "center",
             width: maxWidthVal - 40,
-            margin: 20
+            margin: 20,
         }}>
             <Card style={{
-                width: '100%',
+                width: Math.min(maxWidthVal - 40, 700),
             }}>
                 <Card.Title title="Inloggen" />
                 <Card.Content>
                     <TextInput
-                        style={{ marginBottom: 4 }}
+                        style={{ marginBottom: 6 }}
                         label="Gebruikersnaam"
                         disabled={sending}
                         value={formState.email}
-                        mode="outlined"
                         onChangeText={text => updateForm("email", text)}></TextInput>
                     <TextInput
-                        style={{ marginBottom: 4 }}
+                        style={{ marginBottom: 6 }}
                         label="Wachtwoord"
                         secureTextEntry={true}
                         disabled={sending}
                         value={formState.password}
-                        mode="outlined"
                         onChangeText={text => updateForm("password", text)}></TextInput>
                     <View style={{
                         display: "flex",

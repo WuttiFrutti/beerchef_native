@@ -34,39 +34,37 @@ const RegisterPage = ({ navigation, theme }: { navigation: any, theme: any }) =>
 
     return <>
         <View style={{
+            display: "flex",
             alignItems: 'center',
+            alignContent: "center",
             width: maxWidthVal - 40,
-            margin: 20
+            margin: 20,
         }}>
 
             <Card style={{
-                width: '100%',
+                width: Math.min(maxWidthVal - 40, 700),
             }}>
                 <Card.Title title="Registreren" />
                 <Card.Content>
                     <TextInput
-                        style={{ marginBottom: 4 }}
+                        style={{ marginBottom: 6 }}
                         label="Gebruikersnaam"
                         disabled={sending}
                         value={formState.username}
-                        mode="outlined"
                         onChangeText={text => updateForm("username", text)}></TextInput>
                     <TextInput
-                        style={{ marginBottom: 4 }}
+                        style={{ marginBottom: 6 }}
                         label="Email"
                         disabled={sending}
                         value={formState.email}
-                        mode="outlined"
                         onChangeText={text => updateForm("email", text)}></TextInput>
                     <TextInput label="Wachtwoord"
-                        style={{ marginBottom: 4 }}
-                        mode="outlined"
+                        style={{ marginBottom: 6 }}
                         value={formState.password}
                         disabled={sending}
                         secureTextEntry={true}
                         onChangeText={text => updateForm("password", text)}></TextInput>
                     <TextInput label="Wachtwoord Bevestigen"
-                        mode="outlined"
                         value={formState.passwordrepeat}
                         secureTextEntry={true}
                         disabled={sending}

@@ -24,17 +24,15 @@ const TopBar = ({ theme }: { theme: any }) => {
             <Content />
 
             <Appbar.Action icon={
-                ({ color, size }) => (
-                    <FontAwesome
-                        name="user-circle"
-                        size={size}
-                        color={theme.colors.primary}
-                        solid
-                        style={{
-                            marginBottom: -5,
-                        }}
-                    />
-                )
+                () => <FontAwesome
+                    name="user-circle"
+                    size={24}
+                    color={theme.colors.primary}
+                    solid
+                    style={{
+                        marginBottom: -5,
+                    }}
+                />
             } onPress={() => logout()} />
 
 

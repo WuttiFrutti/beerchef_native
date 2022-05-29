@@ -47,7 +47,7 @@ export default function App() {
       <StoreProviderOverride store={store}>
         <PaperProvider theme={theme}>
           <View>
-            <StatusBar style="dark" />
+            {Platform.OS !== "web" ? <StatusBar style="dark" /> : <></>}
             <LightWave style={waveStyle}
               subStyle={{
                 bottom: 0,

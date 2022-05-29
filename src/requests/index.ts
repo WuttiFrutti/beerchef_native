@@ -1,21 +1,23 @@
 import axios from "axios";
+import { Platform } from "react-native";
 import { retrieveToken } from "../persistence/token";
 
 const Api = axios.create({ baseURL: "http://192.168.178.108:8080", withCredentials: true })
 
 Api.interceptors.request.use(async (config) => {
-    try {
-        const token = await retrieveToken();
-        config.headers = {
-            Cookie: `token=${token};`
-        };
-        return config
-    } catch (e) {
-        config.headers = {
-            Cookie: ``
-        };
-        return config
+    if(Platform.OS !== "web" ){
+        try {
+            const token = await retrieveToken();
+            config.headers = {
+                Cookie: `token=${token};`
+            };
+        } catch (e) {
+            config.headers = {
+                Cookie: ``
+            };
+        }
     }
+    return config
 })
 
 export async function performRequest<T>(request: () => Promise<T>): Promise<T> {
