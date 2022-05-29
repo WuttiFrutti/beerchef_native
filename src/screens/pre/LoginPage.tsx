@@ -1,15 +1,35 @@
-import { Button, Card, Paragraph, Text, TextInput, Title, withTheme } from "react-native-paper";
-import { useEffect } from 'react';
+import { Button, Card, Paragraph, Text, TextInput, withTheme, Checkbox } from "react-native-paper";
+import { useEffect, useState } from 'react';
 import { View } from "react-native";
 import { maxHeight, maxHeightVal, maxWidth, maxWidthVal } from "../../other/Helpers";
 import { Logo } from "../../other/SVG.jsx";
 import { useStoreActions } from "../../hooks/EasyHooks";
 import User from "../../models/User";
+import { Theme } from "react-native-paper/lib/typescript/types";
 
+type LoginFormState = {
+    checkbox: boolean | undefined,
+    email: string | undefined,
+    password: string | undefined
+}
 
-
-const LoginPage = ({ navigation }: { navigation: any }) => {
+const LoginPage = ({ navigation, theme }: { navigation: any, theme: Theme }) => {
     const login = useStoreActions(s => s.userState.login)
+
+    const [formState, setFormState] = useState({
+        checkbox: true,
+        email: "",
+        password: ""
+    } as LoginFormState);
+    const [errors, setErrors] = useState({} as LoginFormState);
+    const [sending, setSending] = useState(false);
+    const register = useStoreActions(a => a.userState.register)
+
+
+    const updateForm = <T,>(prop: string, value: T) => {
+        setFormState({ ...formState, [prop]: value });
+    }
+
 
 
     useEffect(() => navigation.addListener('beforeRemove', (e: any) => {
@@ -19,27 +39,45 @@ const LoginPage = ({ navigation }: { navigation: any }) => {
     return <>
         <View style={{
             alignItems: 'center',
-            justifyContent: 'center',
             width: maxWidthVal - 40,
-            height: maxHeight,
             margin: 20
         }}>
-
             <Card style={{
                 width: '100%',
             }}>
-                <Card.Title title="Card Title" subtitle="Card Subtitle" />
+                <Card.Title title="Inloggen" />
                 <Card.Content>
-                    <Paragraph>Card content</Paragraph>
-
+                    <TextInput
+                        style={{ marginBottom: 4 }}
+                        label="Gebruikersnaam"
+                        disabled={sending}
+                        value={formState.email}
+                        mode="outlined"
+                        onChangeText={text => updateForm("email", text)}></TextInput>
+                    <TextInput
+                        style={{ marginBottom: 4 }}
+                        label="Gebruikersnaam"
+                        disabled={sending}
+                        value={formState.password}
+                        mode="outlined"
+                        onChangeText={text => updateForm("password", text)}></TextInput>
+                    <View style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center"
+                    }}>
+                        <Checkbox
+                            disabled={sending}
+                            color={theme.colors.primary}
+                            status={formState.checkbox ? 'checked' : 'unchecked'}
+                            onPress={() => updateForm("checkbox", !formState.checkbox)}
+                        /><Text>Ingelogd Blijven</Text>
+                    </View>
                     <View>
                         <Button style={{ marginLeft: 'auto' }} uppercase={false} mode="contained" onPress={() => {
-                            // navigation.navigate("register")
-                            // setUser()
-                            // login({ email: 'yeet', password: 'yeet' })
                             login({
-                                email: "yeet2",
-                                password: "test"
+                                email: formState.email as string,
+                                password: formState.password as string
                             })
                         }}>Inloggen</Button>
                     </View>
@@ -55,4 +93,4 @@ const LoginPage = ({ navigation }: { navigation: any }) => {
 
 }
 
-export default LoginPage
+export default withTheme(LoginPage)

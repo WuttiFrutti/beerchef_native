@@ -23,6 +23,6 @@ export const Register = async (username: string, email: string, password: string
 }
 
 export const Logout = async () => {
-   await Api.delete("/auth/login");
-   return;
+    await Api.delete("/auth/login");
+    return;
 }

@@ -1,6 +1,6 @@
 import { Action, action, thunk, Thunk } from "easy-peasy";
 import User from "../models/User";
-import { saveToken } from "../persistence/token";
+import { retrieveToken, saveToken } from "../persistence/token";
 import { performRequest } from "../requests";
 import { Login, Logout, Register, Validate } from "../requests/Auth";
 import { LoadingStatus } from "../types/LoadingStatus";
@@ -22,25 +22,31 @@ const UserState: UserStateModel = {
         state.user = payload;
     }),
     login: thunk(async (actions, payload) => {
+        await removeToken()
         const token = await performRequest(() => Login(payload.email, payload.password))
         await saveToken(token);
         await actions.validate();
     }),
     validate: thunk(async (actions) => {
         try {
-            const user = await performRequest(Validate)
-            actions.setUser(user)
-        } catch {
+            if (await retrieveToken() != "") {
+                const user = await performRequest(Validate)
+                actions.setUser(user)
+            } else {
+                actions.setUser(LoadingStatus.NULL)
+            }
+        } catch (e) {
             actions.setUser(LoadingStatus.NULL)
         }
 
     }),
     register: thunk(async (actions, payload) => {
-        await actions.setUser(await performRequest(() => Register(payload.username, payload.email, payload.password)));
+        await performRequest(() => Register(payload.username, payload.email, payload.password));
+        await actions.login({ email: payload.email, password: payload.password })
     }),
     logout: thunk(async (actions) => {
-        await removeToken();
         await performRequest(Logout)
+        await removeToken();
         actions.setUser(LoadingStatus.NULL)
     }),
 }

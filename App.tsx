@@ -1,4 +1,4 @@
-import { NavigationContainer } from "@react-navigation/native";
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import React from "react";
 import { Provider as PaperProvider } from "react-native-paper";
 import theme from "./src/other/Theme";
@@ -11,6 +11,7 @@ import store from "./src/state";
 import { StoreProvider } from "easy-peasy";
 import { maxHeightVal } from './src/other/Helpers';
 import { StatusBar } from 'expo-status-bar';
+
 
 if (Platform.OS === "web") {
   const body = document.querySelector("body");
@@ -26,6 +27,14 @@ const waveStyle = {
   right: 0,
 }
 
+const navTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: 'transparent',
+  },
+};
+
 const StoreProviderOverride = StoreProvider as any;
 
 LogBox.ignoreLogs([
@@ -34,7 +43,7 @@ LogBox.ignoreLogs([
 
 export default function App() {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={navTheme}>
       <StoreProviderOverride store={store}>
         <PaperProvider theme={theme}>
           <View>

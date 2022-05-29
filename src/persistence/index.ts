@@ -11,7 +11,6 @@ export const storeData = async (key: string, value: any) => {
 export async function retrieveData(key: string): Promise<string> {
     try {
         const value = await AsyncStorage.getItem(`@${key}`)
-        console.log(value)
         if (value !== null) {
             return value
         }

@@ -17,7 +17,7 @@ const itemStyleWidth = 100;
 
 const iconStyle = { width: 100 };
 
-const Main = ({ theme }) => {
+const Main = ({ theme }: { theme:any }) => {
   return (<>
     <TopBar />
 

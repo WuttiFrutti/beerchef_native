@@ -1,25 +1,17 @@
-
-import { useEffect, useState } from "react";
-import { sleep } from "../requests";
-import { useStoreActions, useStoreState } from '../hooks/EasyHooks';
 import Main from "./main";
 import Pre from "./pre";
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import useUser from "../hooks/AuthHooks";
 import { LoadingStatus } from "../types/LoadingStatus";
 import User from "../models/User";
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 const Screens = () => {
     const user = useUser()
 
     return <Stack.Navigator screenOptions={{
         headerShown: false,
-        contentStyle: {
-            backgroundColor: ''
-        },
-        animation: 'slide_from_right'
     }
     }>
         {!(user instanceof User) ? <Stack.Screen
